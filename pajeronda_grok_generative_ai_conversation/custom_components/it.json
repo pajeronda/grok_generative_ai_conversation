@@ -1,1 +1,61 @@
-
+{
+  "title": "Grok Generative AI Conversation",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Configurazione API",
+        "data": {
+          "api_key": "[%key:common::config_flow::data::api_key%]",
+          "api_endpoint": "Endpoint API"
+        },
+        "description": "Ottieni la tua chiave API dal [sito web di x.ai]({api_key_url}). L'endpoint API predefinito dovrebbe funzionare per la maggior parte degli utenti."
+      }
+    },
+    "error": {
+      "cannot_connect": "[%key:common::config_flow::error::cannot_connect%]",
+      "invalid_auth": "[%key:common::config_flow::error::invalid_auth%]",
+      "unknown": "[%key:common::config_flow::error::unknown%]"
+    },
+    "abort": {
+      "single_instance_allowed": "[%key:common::config_flow::abort::single_instance_allowed%]"
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Opzioni Grok",
+        "data": {
+          "prompt": "Prompt Personalizzato",
+          "chat_model": "Modello Chat",
+          "temperature": "Temperatura",
+          "top_p": "Top P",
+          "max_tokens": "Token Massimi",
+          "llm_hass_api": "Modalità Classica (Fallback)"
+        },
+        "data_description": {
+          "prompt": "Aggiungi istruzioni opzionali che verranno aggiunte al prompt predefinito.",
+          "api_endpoint": "L'URL dell'endpoint API. Il predefinito è `https://api.x.ai/v1`.",
+          "chat_model": "Il modello di chat da utilizzare. Raccomandato: {recommended_chat_model}.",
+          "temperature": "La temperatura da utilizzare. Raccomandata: {recommended_temperature}.",
+          "top_p": "Il top_p da utilizzare. Raccomandato: {recommended_top_p}.",
+          "max_tokens": "I token massimi da utilizzare. Raccomandati: {recommended_max_tokens}.",
+          "llm_hass_api": "Abilita la modalità di integrazione LLM classica di Home Assistant. Quando abilitata, bypassa il pipeline personalizzato dei tag e utilizza direttamente gli strumenti standard."
+        }
+      }
+    }
+  },
+  "services": {
+    "generate_content": {
+      "name": "Genera contenuto",
+      "description": "Genera contenuto da un prompt di testo",
+      "fields": {
+        "prompt": {
+          "name": "Prompt",
+          "description": "Il prompt",
+          "example": "Spiega la teoria della relatività in modo semplice"
+        }
+      }
+    }
+  },
+  "errors": {}
+}
