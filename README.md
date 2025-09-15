@@ -1,4 +1,5 @@
-# Grok Generative AI Conversation - FIRST RELEASE - BETA
+# Grok Generative AI Conversation 
+- FIRST RELEASE - BETA
 
 Home Assistant integration for xAI Grok with intelligent smart home command routing
 
