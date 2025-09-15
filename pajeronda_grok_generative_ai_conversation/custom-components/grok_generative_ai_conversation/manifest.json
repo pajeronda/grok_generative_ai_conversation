@@ -1,0 +1,15 @@
+{
+  "name": "Grok Generative AI",
+  "version": "0.1.0",
+  "domain": "grok_generative_ai_conversation",
+  "dependencies": ["conversation"],
+  "after_dependencies": ["assist_pipeline", "intent"],
+  "integration_type": "service",
+  "iot_class": "cloud_polling",
+  "config_flow": true,
+  "requirements": ["openai>=1.97.2"],
+  "documentation": "https://www.github.com/pajeronda/grok_generative_ai_conversation",
+  "issue_tracker": "https://github.com/pajeronda/grok_generative_ai_conversation/issues",
+  "codeowners": ["@pajeronda"],
+  "quality_scale": "bronze"
+}

@@ -1,0 +1,64 @@
+{
+  "title": "Grok Generative AI Conversation",
+  "config": {
+    "step": {
+      "user": {
+        "title": "API Configuration",
+        "data": {
+          "api_key": "[%key:common::config_flow::data::api_key%]",
+          "api_endpoint": "API Endpoint"
+        },
+        "description": "Get your API key from the [x.ai website]({api_key_url}). The default API endpoint should work for most users."
+      }
+    },
+    "error": {
+      "cannot_connect": "[%key:common::config_flow::error::cannot_connect%]",
+      "invalid_auth": "[%key:common::config_flow::error::invalid_auth%]",
+      "unknown": "[%key:common::config_flow::error::unknown%]"
+    },
+    "abort": {
+      "single_instance_allowed": "[%key:common::config_flow::abort::single_instance_allowed%]"
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Grok Options",
+        "data": {
+          "prompt": "System Prompt",
+          "chat_model": "Chat Model",
+          "temperature": "Temperature",
+          "top_p": "Top P",
+          "max_tokens": "Max Tokens",
+          "llm_hass_api": "Classic Mode (Fallback)"
+        },
+        "data_description": {
+          "prompt": "Add optional instructions that will be appended to the default prompt.",
+          "api_endpoint": "The URL of the API endpoint. The default is `https://api.x.ai/v1`.",
+          "chat_model": "The chat model to use. Recommended: {recommended_chat_model}.",
+          "temperature": "The temperature to use. Recommended: {recommended_temperature}.",
+          "top_p": "The top_p to use. Recommended: {recommended_top_p}.",
+          "max_tokens": "The maximum tokens to use. Recommended: {recommended_max_tokens}.",
+          "llm_hass_api": "Enable classic Home Assistant LLM integration mode. When enabled, bypasses custom tag pipeline and uses standard tools directly."
+        }
+      }
+    }
+  },
+  "services": {
+    "generate_content": {
+      "name": "Generate content",
+      "description": "Generate content using Grok.",
+      "fields": {
+        "prompt": {
+          "name": "Prompt",
+          "description": "The prompt to use."
+        },
+        "max_tokens": {
+          "name": "Max tokens",
+          "description": "The maximum number of tokens to generate."
+        }
+      }
+    }
+  },
+  "errors": {}
+}
