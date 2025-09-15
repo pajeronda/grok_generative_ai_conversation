@@ -1,6 +1,6 @@
 # Grok Generative AI Conversation 
 - FIRST RELEASE - BETA
-
+## 🎯 Concept: LLM as Intelligent Router
 Home Assistant integration for xAI Grok with intelligent smart home command routing
 
 A sophisticated Home Assistant custom integration that combines the conversational intelligence of xAI's Grok models with Home Assistant's native smart home capabilities.
