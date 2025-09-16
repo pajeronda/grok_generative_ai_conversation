@@ -3,11 +3,12 @@
   "config": {
     "step": {
       "user": {
-        "title": "API Key",
+        "title": "API Configuration",
         "data": {
-          "api_key": "[%key:common::config_flow::data::api_key%]"
+          "api_key": "[%key:common::config_flow::data::api_key%]",
+          "api_endpoint": "API Endpoint"
         },
-        "description": "To get your API key, go to your account on the [x.ai website]({api_key_url})."
+        "description": "Get your API key from the [x.ai website]({api_key_url}). The default API endpoint should work for most users."
       }
     },
     "error": {
@@ -24,20 +25,22 @@
       "init": {
         "title": "Grok Options",
         "data": {
-          "prompt": "Custom Prompt",
-          "llm_hass_api": "Enable Home Assistant Control",
+          "prompt": "System Prompt",
+          "api_endpoint": "API Endpoint",
           "chat_model": "Chat Model",
           "temperature": "Temperature",
           "top_p": "Top P",
-          "max_tokens": "Max Tokens"
+          "max_tokens": "Max Tokens",
+          "llm_hass_api": "Classic Mode (Fallback)"
         },
         "data_description": {
           "prompt": "Add optional instructions that will be appended to the default prompt.",
-          "llm_hass_api": "If supported by the model, enables Home Assistant control.",
+          "api_endpoint": "The URL of the API endpoint. The default is `https://api.x.ai/v1`.",
           "chat_model": "The chat model to use. Recommended: {recommended_chat_model}.",
           "temperature": "The temperature to use. Recommended: {recommended_temperature}.",
           "top_p": "The top_p to use. Recommended: {recommended_top_p}.",
-          "max_tokens": "The maximum tokens to use. Recommended: {recommended_max_tokens}."
+          "max_tokens": "The maximum tokens to use. Recommended: {recommended_max_tokens}.",
+          "llm_hass_api": "Enable classic Home Assistant LLM integration mode. When enabled, bypasses custom tag pipeline and uses standard tools directly."
         }
       }
     }
@@ -45,14 +48,14 @@
   "services": {
     "generate_content": {
       "name": "Generate content",
-      "description": "Generate content from a text prompt",
+      "description": "Generate content using Grok.",
       "fields": {
         "prompt": {
           "name": "Prompt",
-          "description": "The prompt",
-          "example": "Explain the theory of relativity in simple terms"
+          "description": "The prompt to use."
         }
       }
     }
-  }
+  },
+  "errors": {}
 }
