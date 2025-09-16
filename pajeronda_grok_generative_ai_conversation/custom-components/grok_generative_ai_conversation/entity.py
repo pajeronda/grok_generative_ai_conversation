@@ -49,7 +49,7 @@ def _as_message_content(value: Any) -> str:
 
 def _format_tool_for_openai(tool: llm.Tool) -> dict[str, Any]:
     """Convert Home Assistant tool to OpenAI format."""
-    tool_def = {
+    tool_def: dict[str, Any] = {
         "type": "function",
         "function": {
             "name": tool.name,
@@ -284,7 +284,7 @@ class GrokGenerativeAILLMBaseEntity(Entity):
                             # If we have any non-whitespace content that's not [[, it's conversation
                             elif stripped_buffer and not stripped_buffer.startswith("[["):
                                 yield {"content": buffer}
-                                tag_detected = None  # Mark as decided - regular conversation
+                                tag_detected = False  # Mark as decided - regular conversation
                                 buffer = ""
                         elif tag_detected is True:
                             # Accumulating tag content
