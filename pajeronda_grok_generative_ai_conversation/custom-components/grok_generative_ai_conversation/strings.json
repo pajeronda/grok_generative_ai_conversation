@@ -26,6 +26,7 @@
         "title": "Grok Options",
         "data": {
           "prompt": "System Prompt",
+          "api_endpoint": "API Endpoint",
           "chat_model": "Chat Model",
           "temperature": "Temperature",
           "top_p": "Top P",
@@ -52,10 +53,6 @@
         "prompt": {
           "name": "Prompt",
           "description": "The prompt to use."
-        },
-        "max_tokens": {
-          "name": "Max tokens",
-          "description": "The maximum number of tokens to generate."
         }
       }
     }
