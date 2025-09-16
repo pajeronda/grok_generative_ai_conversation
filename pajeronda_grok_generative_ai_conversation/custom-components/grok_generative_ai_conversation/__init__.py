@@ -35,11 +35,13 @@ from homeassistant.helpers.typing import ConfigType
 from .const import (
     CONF_PROMPT,
     DEFAULT_AI_TASK_NAME,
+    DEFAULT_CONVERSATION_NAME,
     DEFAULT_TITLE,
     DOMAIN,
     LOGGER,
     RECOMMENDED_AI_TASK_OPTIONS,
     RECOMMENDED_CHAT_MODEL,
+    RECOMMENDED_CONVERSATION_OPTIONS,
     TIMEOUT_MILLIS,
     CONF_API_ENDPOINT,
     DEFAULT_API_ENDPOINT,
@@ -148,6 +150,29 @@ async def async_setup_entry(
     else:
         entry.runtime_data = client
 
+    # Ensure subentries exist for new installations
+    if not any(se.subentry_type == "conversation" for se in entry.subentries.values()):
+        hass.config_entries.async_add_subentry(
+            entry,
+            ConfigSubentry(
+                data=MappingProxyType(RECOMMENDED_CONVERSATION_OPTIONS),
+                subentry_type="conversation",
+                title=DEFAULT_CONVERSATION_NAME,
+                unique_id=None,
+            ),
+        )
+
+    if not any(se.subentry_type == "ai_task_data" for se in entry.subentries.values()):
+        hass.config_entries.async_add_subentry(
+            entry,
+            ConfigSubentry(
+                data=MappingProxyType(RECOMMENDED_AI_TASK_OPTIONS),
+                subentry_type="ai_task_data",
+                title=DEFAULT_AI_TASK_NAME,
+                unique_id=None,
+            ),
+        )
+
     await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
     entry.async_on_unload(entry.add_update_listener(async_update_options))
     return True
@@ -176,6 +201,18 @@ async def async_migrate_integration(hass: HomeAssistant) -> None:
         return
 
     for entry in entries:
+        # Ensure conversation subentry exists
+        if not any(se.subentry_type == "conversation" for se in entry.subentries.values()):
+            hass.config_entries.async_add_subentry(
+                entry,
+                ConfigSubentry(
+                    data=MappingProxyType(RECOMMENDED_CONVERSATION_OPTIONS),
+                    subentry_type="conversation",
+                    title=DEFAULT_CONVERSATION_NAME,
+                    unique_id=None,
+                ),
+            )
+
         # Ensure an AI task subentry exists
         if not any(se.subentry_type == "ai_task_data" for se in entry.subentries.values()):
             hass.config_entries.async_add_subentry(
