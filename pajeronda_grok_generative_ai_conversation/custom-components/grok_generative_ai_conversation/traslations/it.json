@@ -5,19 +5,19 @@
       "user": {
         "title": "Configurazione API",
         "data": {
-          "api_key": "[%key:common::config_flow::data::api_key%]",
+          "api_key": "Chiave API",
           "api_endpoint": "Endpoint API"
         },
         "description": "Ottieni la tua chiave API dal [sito web di x.ai]({api_key_url}). L'endpoint API predefinito dovrebbe funzionare per la maggior parte degli utenti."
       }
     },
     "error": {
-      "cannot_connect": "[%key:common::config_flow::error::cannot_connect%]",
-      "invalid_auth": "[%key:common::config_flow::error::invalid_auth%]",
-      "unknown": "[%key:common::config_flow::error::unknown%]"
+      "cannot_connect": "Impossibile connettersi",
+      "invalid_auth": "Autenticazione non valida",
+      "unknown": "Errore sconosciuto"
     },
     "abort": {
-      "single_instance_allowed": "[%key:common::config_flow::abort::single_instance_allowed%]"
+      "single_instance_allowed": "È consentita una sola istanza"
     }
   },
   "options": {
