@@ -1,22 +1,58 @@
 {
+  "title": "Grok Generative AI Conversation",
   "config": {
     "step": {
       "user": {
+        "title": "API-Konfiguration",
         "data": {
+          "api_key": "[%key:common::config_flow::data::api_key%]",
           "api_endpoint": "API-Endpunkt"
-        }
+        },
+        "description": "Holen Sie sich Ihren API-Schlüssel von der [x.ai-Website]({api_key_url}). Der Standard-API-Endpunkt sollte für die meisten Benutzer funktionieren."
       }
+    },
+    "error": {
+      "cannot_connect": "[%key:common::config_flow::error::cannot_connect%]",
+      "invalid_auth": "[%key:common::config_flow::error::invalid_auth%]",
+      "unknown": "[%key:common::config_flow::error::unknown%]"
+    },
+    "abort": {
+      "single_instance_allowed": "[%key:common::config_flow::abort::single_instance_allowed%]"
     }
   },
   "options": {
     "step": {
       "init": {
+        "title": "Grok-Optionen",
         "data": {
-          "llm_hass_api": "Home Assistant-Steuerung aktivieren"
+          "prompt": "System-Prompt",
+          "api_endpoint": "API-Endpunkt",
+          "chat_model": "Chat-Modell",
+          "temperature": "Temperatur",
+          "top_p": "Top P",
+          "max_tokens": "Max Tokens",
+          "llm_hass_api": "Klassischer Modus (Fallback)"
         },
         "data_description": {
-          "llm_hass_api": "Die Aktivierung von Assist deaktiviert die Tag-Steuerung.",
-          "api_endpoint": "Die URL des API-Endpunkts. Der Standardwert ist `https://api.x.ai/v1`."
+          "prompt": "Fügen Sie optionale Anweisungen hinzu, die an den Standard-Prompt angehängt werden.",
+          "api_endpoint": "Die URL des API-Endpunkts. Der Standardwert ist `https://api.x.ai/v1`.",
+          "chat_model": "Das zu verwendende Chat-Modell. Empfohlen: {recommended_chat_model}.",
+          "temperature": "Die zu verwendende Temperatur. Empfohlen: {recommended_temperature}.",
+          "top_p": "Der zu verwendende top_p. Empfohlen: {recommended_top_p}.",
+          "max_tokens": "Die zu verwendenden maximalen Tokens. Empfohlen: {recommended_max_tokens}.",
+          "llm_hass_api": "Aktiviert den klassischen Home Assistant LLM-Integrationsmodus. Wenn aktiviert, umgeht es die benutzerdefinierte Tag-Pipeline und verwendet standardmäßig direkte Tools."
+        }
+      }
+    }
+  },
+  "services": {
+    "generate_content": {
+      "name": "Inhalt generieren",
+      "description": "Inhalt mit Grok generieren.",
+      "fields": {
+        "prompt": {
+          "name": "Prompt",
+          "description": "Der zu verwendende Prompt."
         }
       }
     }
