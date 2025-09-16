@@ -1,0 +1,77 @@
+{
+  "title": "Grok Generative AI Conversation",
+  "config": {
+    "step": {
+      "user": {
+        "title": "API Configuration",
+        "data": {
+          "api_key": "API Key",
+          "api_endpoint": "API Endpoint"
+        },
+        "description": "Get your API key from the [x.ai website]({api_key_url}). The default API endpoint should work for most users."
+      }
+    },
+    "error": {
+      "cannot_connect": "Failed to connect",
+      "invalid_auth": "Invalid authentication",
+      "unknown": "Unknown error"
+    },
+    "abort": {
+      "single_instance_allowed": "Only one instance allowed"
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Grok Options",
+        "data": {
+          "prompt": "System Prompt",
+          "api_endpoint": "API Endpoint",
+          "chat_model": "Chat Model",
+          "temperature": "Temperature",
+          "top_p": "Top P",
+          "max_tokens": "Max Tokens",
+          "llm_hass_api": "Classic Mode (Fallback)"
+        },
+        "data_description": {
+          "prompt": "Add optional instructions that will be appended to the default prompt.",
+          "api_endpoint": "The URL of the API endpoint. The default is `https://api.x.ai/v1`.",
+          "chat_model": "The chat model to use. Recommended: {recommended_chat_model}.",
+          "temperature": "The temperature to use. Recommended: {recommended_temperature}.",
+          "top_p": "The top_p to use. Recommended: {recommended_top_p}.",
+          "max_tokens": "The maximum tokens to use. Recommended: {recommended_max_tokens}.",
+          "llm_hass_api": "Enable classic Home Assistant LLM integration mode. When enabled, bypasses custom tag pipeline and uses standard tools directly."
+        }
+      }
+    }
+  },
+  "services": {
+    "generate_content": {
+      "name": "Generate content",
+      "description": "Generate content using Grok.",
+      "fields": {
+        "prompt": {
+          "name": "Prompt",
+          "description": "The prompt to use."
+        },
+        "chat_model": {
+          "name": "Model",
+          "description": "The Grok model to use for generation."
+        },
+        "temperature": {
+          "name": "Temperature",
+          "description": "Controls randomness in the output."
+        },
+        "top_p": {
+          "name": "Top P",
+          "description": "Controls diversity of word selection."
+        },
+        "max_tokens": {
+          "name": "Maximum Tokens",
+          "description": "Maximum number of tokens to generate."
+        }
+      }
+    }
+  },
+  "errors": {}
+}

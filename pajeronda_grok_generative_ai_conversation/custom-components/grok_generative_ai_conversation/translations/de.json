@@ -1,0 +1,77 @@
+{
+  "title": "Grok Generative AI Conversation",
+  "config": {
+    "step": {
+      "user": {
+        "title": "API-Konfiguration",
+        "data": {
+          "api_key": "API-Schlüssel",
+          "api_endpoint": "API-Endpunkt"
+        },
+        "description": "Holen Sie sich Ihren API-Schlüssel von der [x.ai-Website]({api_key_url}). Der Standard-API-Endpunkt sollte für die meisten Benutzer funktionieren."
+      }
+    },
+    "error": {
+      "cannot_connect": "Verbindung nicht möglich",
+      "invalid_auth": "Ungültige Authentifizierung",
+      "unknown": "Unbekannter Fehler"
+    },
+    "abort": {
+      "single_instance_allowed": "Nur eine Instanz erlaubt"
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Grok-Optionen",
+        "data": {
+          "prompt": "System-Prompt",
+          "api_endpoint": "API-Endpunkt",
+          "chat_model": "Chat-Modell",
+          "temperature": "Temperatur",
+          "top_p": "Top P",
+          "max_tokens": "Max Tokens",
+          "llm_hass_api": "Klassischer Modus (Fallback)"
+        },
+        "data_description": {
+          "prompt": "Fügen Sie optionale Anweisungen hinzu, die an den Standard-Prompt angehängt werden.",
+          "api_endpoint": "Die URL des API-Endpunkts. Der Standardwert ist `https://api.x.ai/v1`.",
+          "chat_model": "Das zu verwendende Chat-Modell. Empfohlen: {recommended_chat_model}.",
+          "temperature": "Die zu verwendende Temperatur. Empfohlen: {recommended_temperature}.",
+          "top_p": "Der zu verwendende top_p. Empfohlen: {recommended_top_p}.",
+          "max_tokens": "Die zu verwendenden maximalen Tokens. Empfohlen: {recommended_max_tokens}.",
+          "llm_hass_api": "Aktiviert den klassischen Home Assistant LLM-Integrationsmodus. Wenn aktiviert, umgeht es die benutzerdefinierte Tag-Pipeline und verwendet standardmäßig direkte Tools."
+        }
+      }
+    }
+  },
+  "services": {
+    "generate_content": {
+      "name": "Inhalt generieren",
+      "description": "Inhalt mit Grok generieren.",
+      "fields": {
+        "prompt": {
+          "name": "Prompt",
+          "description": "Der zu verwendende Prompt."
+        },
+        "chat_model": {
+          "name": "Modell",
+          "description": "Das Grok-Modell für die Generierung."
+        },
+        "temperature": {
+          "name": "Temperatur",
+          "description": "Steuert die Zufälligkeit in der Ausgabe."
+        },
+        "top_p": {
+          "name": "Top P",
+          "description": "Steuert die Vielfalt der Wortauswahl."
+        },
+        "max_tokens": {
+          "name": "Maximale Tokens",
+          "description": "Maximale Anzahl der zu generierenden Tokens."
+        }
+      }
+    }
+  },
+  "errors": {}
+}
