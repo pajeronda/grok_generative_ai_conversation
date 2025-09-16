@@ -4,6 +4,7 @@ from typing import Any
 import voluptuous as vol
 
 from homeassistant.config_entries import ConfigFlow, ConfigEntry, OptionsFlowWithConfigEntry
+from homeassistant import config_entries
 from homeassistant.const import CONF_API_KEY, CONF_LLM_HASS_API
 from homeassistant.core import callback
 from homeassistant.data_entry_flow import FlowResult
@@ -30,7 +31,8 @@ from .const import (
 )
 
 
-class GrokConfigFlow(ConfigFlow, domain=DOMAIN):
+@config_entries.HANDLERS.register(DOMAIN)
+class GrokConfigFlow(ConfigFlow):
     """Handle a config flow for Grok Generative AI."""
 
     VERSION = 2
@@ -43,7 +45,7 @@ class GrokConfigFlow(ConfigFlow, domain=DOMAIN):
             return self.async_abort(reason="single_instance_allowed")
 
         if user_input is not None:
-            # Qui dovresti validare la API Key prima di creare l'entry
+            # You should validate the API Key before creating the entry
             return self.async_create_entry(title="Grok Generative AI", data=user_input)
 
         return self.async_show_form(
@@ -81,7 +83,7 @@ class GrokOptionsFlow(OptionsFlowWithConfigEntry):
         """Manage the options."""
 
         if user_input is not None:
-            # Pulisci il prompt se è vuoto
+            # Clean the prompt if it's empty
             if not user_input.get(CONF_PROMPT, "").strip():
                 user_input.pop(CONF_PROMPT, None)
 
@@ -103,6 +105,12 @@ class GrokOptionsFlow(OptionsFlowWithConfigEntry):
                         CONF_PROMPT,
                         description={
                             "suggested_value": self.options.get(CONF_PROMPT, "")
+                        },
+                    ): str,
+                    vol.Optional(
+                        CONF_API_ENDPOINT,
+                        description={
+                            "suggested_value": self.options.get(CONF_API_ENDPOINT, DEFAULT_API_ENDPOINT)
                         },
                     ): str,
                     vol.Optional(
