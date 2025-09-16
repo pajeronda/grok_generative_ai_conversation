@@ -22,7 +22,7 @@ async def async_setup_entry(
     async_add_entities: AddConfigEntryEntitiesCallback,
 ) -> None:
     """Set up conversation entities."""
-    # Se esistono subentry di tipo "conversation", le istanziamo.
+    # If conversation-type subentries exist, instantiate them.
     created = False
     for subentry in config_entry.subentries.values():
         if subentry.subentry_type != "conversation":
@@ -39,7 +39,7 @@ async def async_setup_entry(
                 self.subentry_type = "conversation"
                 self.subentry_id = f"{entry.entry_id}:conversation"
                 self.title = entry.title or "Grok AI Conversation"
-                # Merge data+options come sorgente impostazioni
+                # Merge data+options as settings source
                 data = dict(entry.data)
                 data.update(entry.options)
                 self.data = data
@@ -60,8 +60,8 @@ class GrokGenerativeAIConversationEntity(
     def __init__(self, entry: ConfigEntry, subentry: ConfigSubentry) -> None:
         """Initialize the agent."""
         super().__init__(entry, subentry)
-        # Espone CONTROL sempre per supportare il fallback con tools
-        # La logica di attivazione è gestita tramite tools_control parameter
+        # Always expose CONTROL to support tools fallback
+        # Activation logic is handled via tools_control parameter
         self._attr_supported_features = conversation.ConversationEntityFeature.CONTROL
 
     @property
@@ -84,7 +84,7 @@ class GrokGenerativeAIConversationEntity(
         return False
 
     def _get_str_option(self, key: str) -> str | None:
-        """Stringa non vuota da subentry o root, altrimenti None."""
+        """Non-empty string from subentry or root, otherwise None."""
         def pick(v):
             return v if isinstance(v, str) and v.strip() else None
         return pick(self.subentry.data.get(key)) or pick(self.entry.options.get(key)) or pick(self.entry.data.get(key))
