@@ -27,9 +27,9 @@ User Input → LLM (Grok) → Intelligent Decision:
 ```
 
 ### Pipeline Phases
-[wrap="center"]
-<img width="1100" height="1811" alt="immagine" src="https://github.com/user-attachments/assets/7bef7e43-abd9-4634-b297-331070ad3547" />
-[/wrap]
+<div align="center">
+<img width="50%" height="auto" alt="immagine" src="https://github.com/user-attachments/assets/7bef7e43-abd9-4634-b297-331070ad3547" />
+</div>
 
 #### 1. **LLM Analysis Phase** 🧠
 - Grok analyzes the user's input in any language
