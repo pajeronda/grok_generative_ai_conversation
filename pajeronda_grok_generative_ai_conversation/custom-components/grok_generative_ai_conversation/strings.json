@@ -5,19 +5,19 @@
       "user": {
         "title": "API Configuration",
         "data": {
-          "api_key": "[%key:common::config_flow::data::api_key%]",
+          "api_key": "API Key",
           "api_endpoint": "API Endpoint"
         },
         "description": "Get your API key from the [x.ai website]({api_key_url}). The default API endpoint should work for most users."
       }
     },
     "error": {
-      "cannot_connect": "[%key:common::config_flow::error::cannot_connect%]",
-      "invalid_auth": "[%key:common::config_flow::error::invalid_auth%]",
-      "unknown": "[%key:common::config_flow::error::unknown%]"
+      "cannot_connect": "Failed to connect",
+      "invalid_auth": "Invalid authentication",
+      "unknown": "Unknown error"
     },
     "abort": {
-      "single_instance_allowed": "[%key:common::config_flow::abort::single_instance_allowed%]"
+      "single_instance_allowed": "Only one instance allowed"
     }
   },
   "options": {
