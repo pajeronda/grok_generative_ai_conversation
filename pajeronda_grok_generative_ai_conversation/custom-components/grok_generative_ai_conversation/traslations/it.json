@@ -25,7 +25,8 @@
       "init": {
         "title": "Opzioni Grok",
         "data": {
-          "prompt": "Prompt Personalizzato",
+          "prompt": "Prompt di Sistema",
+          "api_endpoint": "Endpoint API",
           "chat_model": "Modello Chat",
           "temperature": "Temperatura",
           "top_p": "Top P",
@@ -47,12 +48,11 @@
   "services": {
     "generate_content": {
       "name": "Genera contenuto",
-      "description": "Genera contenuto da un prompt di testo",
+      "description": "Genera contenuto utilizzando Grok.",
       "fields": {
         "prompt": {
           "name": "Prompt",
-          "description": "Il prompt",
-          "example": "Spiega la teoria della relatività in modo semplice"
+          "description": "Il prompt da utilizzare."
         }
       }
     }
