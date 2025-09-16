@@ -25,13 +25,15 @@ RECOMMENDED_TOP_P = 1.0
 RECOMMENDED_MAX_TOKENS = 2000
 
 # conversation.py - Recommended defaults for Conversation subentry:
-# - CONF_PROMPT is not included: leaving it empty allows conversation.py to use prompt_default.py
 # - CONF_LLM_HASS_API defaults to False to use custom tag-based pipeline
 # - When False: custom tag pipeline (LLM → tag detection → Assist → Tools fallback)
 # - When True: direct HA LLM mode (LLM with direct tools integration)
 RECOMMENDED_CONVERSATION_OPTIONS = {
     CONF_LLM_HASS_API: False,
 }
+
+# conversation.py - Default name for Conversation subentry
+DEFAULT_CONVERSATION_NAME = "Grok Conversation"
 
 # ai_task.py - Recommended defaults for AI Task subentry
 DEFAULT_AI_TASK_NAME = "Grok AI Task"
