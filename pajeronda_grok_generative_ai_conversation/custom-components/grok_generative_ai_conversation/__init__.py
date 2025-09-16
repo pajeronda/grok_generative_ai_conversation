@@ -43,6 +43,10 @@ from .const import (
     TIMEOUT_MILLIS,
     CONF_API_ENDPOINT,
     DEFAULT_API_ENDPOINT,
+    CONF_CHAT_MODEL,
+    CONF_TEMPERATURE,
+    CONF_TOP_P,
+    CONF_MAX_TOKENS,
 )
 
 SERVICE_GENERATE_CONTENT = "generate_content"
@@ -63,6 +67,10 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
     async def generate_content(call: ServiceCall) -> ServiceResponse:
         """Generate content from a text prompt (attachments not supported)."""
         prompt: str = call.data[CONF_PROMPT]
+        model: str = call.data.get(CONF_CHAT_MODEL, RECOMMENDED_CHAT_MODEL)
+        temperature: float | None = call.data.get(CONF_TEMPERATURE)
+        top_p: float | None = call.data.get(CONF_TOP_P)
+        max_tokens: int | None = call.data.get(CONF_MAX_TOKENS)
 
         # Get client from first loaded entry
         config_entry: GrokGenerativeAIConfigEntry = (
@@ -70,11 +78,20 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
         )
         client = config_entry.runtime_data
 
+        # Build API parameters, only including non-None values
+        api_params = {
+            "model": model,
+            "messages": [{"role": "user", "content": prompt}],
+        }
+        if temperature is not None:
+            api_params["temperature"] = temperature
+        if top_p is not None:
+            api_params["top_p"] = top_p
+        if max_tokens is not None:
+            api_params["max_tokens"] = max_tokens
+
         try:
-            resp = await client.chat.completions.create(
-                model=RECOMMENDED_CHAT_MODEL,
-                messages=[{"role": "user", "content": prompt}],
-            )
+            resp = await client.chat.completions.create(**api_params)
         except AuthenticationError as err:
             raise HomeAssistantError(f"Authentication failed: {err}") from err
         except (APIConnectionError, RateLimitError, BadRequestError, Exception) as err:
@@ -93,6 +110,10 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
         schema=vol.Schema(
             {
                 vol.Required(CONF_PROMPT): cv.string,
+                vol.Optional(CONF_CHAT_MODEL): cv.string,
+                vol.Optional(CONF_TEMPERATURE): vol.Coerce(float),
+                vol.Optional(CONF_TOP_P): vol.Coerce(float),
+                vol.Optional(CONF_MAX_TOKENS): vol.Coerce(int),
             }
         ),
         supports_response=SupportsResponse.ONLY,
