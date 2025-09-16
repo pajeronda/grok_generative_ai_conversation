@@ -25,19 +25,21 @@ RECOMMENDED_TOP_P = 1.0
 RECOMMENDED_MAX_TOKENS = 2000
 
 # conversation.py - Recommended defaults for Conversation subentry:
-# - CONF_PROMPT is not included here: leaving it empty allows conversation.py to use prompt_default.py
-# - llm_hass_api defaults to False to force [[HA_LOCAL:]] tag-based pipeline mode
-# - When False: custom tag pipeline is used (LLM → tag detection → Assist → Tools fallback)
-# - When True: classic HA LLM mode is used (LLM with direct tools integration)
+# - CONF_PROMPT is not included: leaving it empty allows conversation.py to use prompt_default.py
+# - CONF_LLM_HASS_API defaults to False to use custom tag-based pipeline
+# - When False: custom tag pipeline (LLM → tag detection → Assist → Tools fallback)
+# - When True: direct HA LLM mode (LLM with direct tools integration)
 RECOMMENDED_CONVERSATION_OPTIONS = {
     CONF_LLM_HASS_API: False,
-    "recommended": True,
 }
 
-# ai_task.py
+# ai_task.py - Recommended defaults for AI Task subentry
 DEFAULT_AI_TASK_NAME = "Grok AI Task"
 RECOMMENDED_AI_TASK_OPTIONS = {
-    "recommended": True,
+    CONF_CHAT_MODEL: RECOMMENDED_CHAT_MODEL,
+    CONF_TEMPERATURE: RECOMMENDED_TEMPERATURE,
+    CONF_TOP_P: RECOMMENDED_TOP_P,
+    CONF_MAX_TOKENS: RECOMMENDED_MAX_TOKENS,
 }
 
 # entity.py
@@ -46,4 +48,3 @@ ERROR_HANDOFF_FAILED = "I was not able to handle your request. Please try rephra
 DEFAULT_LOCAL_AGENT = "conversation.home_assistant"
 LOCAL_TAG_START = "[["
 LOCAL_TAG_RE = re.compile(r"\[\[HA_LOCAL:\s*(.*?)\s*\]\]", re.DOTALL)
-
