@@ -1,7 +1,69 @@
 generate_content:
+  name: Generate Content with Grok
+  description: Generate AI content using Grok models. Perfect for creative writing, explanations, summaries, and more.
   fields:
     prompt:
+      name: Prompt
+      description: The text prompt that describes what you want Grok to generate. Be specific for better results.
       required: true
+      example: "Write a creative short story about a robot learning to paint"
       selector:
         text:
           multiline: true
+
+    model:
+      name: Model
+      description: The Grok model to use for generation. Different models have different capabilities and response styles.
+      required: false
+      default: "grok-3-mini"
+      example: "grok-3-mini"
+      selector:
+        select:
+          options:
+            - value: "grok-4"
+              label: "Grok 4 (Latest, most capable)"
+            - value: "grok-3"
+              label: "Grok 3 (Balanced performance)"
+            - value: "grok-3-mini"
+              label: "Grok 3 Mini (Fast, efficient)"
+          mode: dropdown
+          custom_value: true
+
+    temperature:
+      name: Temperature
+      description: Controls randomness in the output. Lower values (0.0-0.3) for factual content, higher values (0.7-1.0) for creative content.
+      required: false
+      default: 0.0
+      example: 0.7
+      selector:
+        number:
+          min: 0.0
+          max: 2.0
+          step: 0.1
+          mode: box
+
+    top_p:
+      name: Top P (Nucleus Sampling)
+      description: Controls diversity of word selection. Lower values focus on more likely words, higher values allow more variety.
+      required: false
+      default: 1.0
+      example: 0.9
+      selector:
+        number:
+          min: 0.1
+          max: 1.0
+          step: 0.1
+          mode: box
+
+    max_tokens:
+      name: Maximum Tokens
+      description: Maximum number of tokens to generate. Higher values allow longer responses but may take more time.
+      required: false
+      default: 2000
+      example: 1500
+      selector:
+        number:
+          min: 50
+          max: 8192
+          step: 50
+          mode: box
