@@ -47,7 +47,7 @@ class GrokGenerativeAITaskEntity(
         """Handle a generate data task."""
         await self._async_handle_chat_log(chat_log, task.structure)
 
-        # Prendi l'ULTIMO AssistantContent disponibile, non per forza l'ultimo elemento del log.
+        # Get the LAST available AssistantContent, not necessarily the last log element.
         last_assistant = None
         for item in reversed(chat_log.content):
             if isinstance(item, conversation.AssistantContent):
