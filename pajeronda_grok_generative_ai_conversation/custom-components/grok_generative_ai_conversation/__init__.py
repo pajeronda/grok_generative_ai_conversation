@@ -61,10 +61,10 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
     await async_migrate_integration(hass)
 
     async def generate_content(call: ServiceCall) -> ServiceResponse:
-        """Generate content from a text prompt (attachments non supportati)."""
+        """Generate content from a text prompt (attachments not supported)."""
         prompt: str = call.data[CONF_PROMPT]
 
-        # Recupera il client dalla prima entry caricata
+        # Get client from first loaded entry
         config_entry: GrokGenerativeAIConfigEntry = (
             hass.config_entries.async_loaded_entries(DOMAIN)[0]
         )
@@ -76,13 +76,13 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
                 messages=[{"role": "user", "content": prompt}],
             )
         except AuthenticationError as err:
-            raise HomeAssistantError(f"Autenticazione fallita: {err}") from err
+            raise HomeAssistantError(f"Authentication failed: {err}") from err
         except (APIConnectionError, RateLimitError, BadRequestError, Exception) as err:
-            raise HomeAssistantError(f"Errore generazione contenuto: {err}") from err
+            raise HomeAssistantError(f"Content generation error: {err}") from err
 
         text = (resp.choices[0].message.content if resp.choices else None) or ""
         if not text:
-            raise HomeAssistantError("Errore sconosciuto generando il contenuto")
+            raise HomeAssistantError("Unknown error generating content")
 
         return {"text": text}
 
@@ -104,10 +104,10 @@ async def async_setup_entry(
     hass: HomeAssistant, entry: GrokGenerativeAIConfigEntry
 ) -> bool:
     """Set up Grok Generative AI Conversation from a config entry."""
-    # Istanzia client OpenAI-compatibile puntando a X.ai
+    # Initialize OpenAI-compatible client pointing to X.ai
     api_endpoint = entry.data.get(CONF_API_ENDPOINT, DEFAULT_API_ENDPOINT)
     try:
-        # Evita blocking call (caricamento certificati) nell'event loop
+        # Avoid blocking call (certificate loading) in event loop
         client = await hass.async_add_executor_job(
             partial(
                 AsyncOpenAI,
@@ -116,7 +116,7 @@ async def async_setup_entry(
                 timeout=TIMEOUT_MILLIS / 1000,
             )
         )
-        # Verifica di base: elenco modelli
+        # Basic verification: list models
         await client.models.list()
     except AuthenticationError as err:
         raise ConfigEntryAuthFailed(str(err)) from err
@@ -149,34 +149,13 @@ async def async_update_options(
 
 
 async def async_migrate_integration(hass: HomeAssistant) -> None:
-    """Migrate integration entry structure per rimozione STT/TTS."""
-    # Migrazione da versioni precedenti: rimuovi subentry TTS/STT e consolida
-    entries = sorted(
-        hass.config_entries.async_entries(DOMAIN),
-        key=lambda e: e.disabled_by is not None,
-    )
-    # Se non ci sono v1/v2 da migrare o nessuna entry, nulla da fare
+    """Ensure AI task subentries exist for all entries."""
+    entries = hass.config_entries.async_entries(DOMAIN)
     if not entries:
         return
 
-    entity_registry = er.async_get(hass)
-    device_registry = dr.async_get(hass)
-
     for entry in entries:
-        # Rimuovi eventuali subentry TTS/STT residuali
-        for sub_id, sub in list(entry.subentries.items()):
-            if sub.subentry_type in ("tts", "stt"):
-                device = device_registry.async_get_device(
-                    identifiers={(DOMAIN, sub.subentry_id)}
-                )
-                if device:
-                    device_registry.async_update_device(
-                        device.id,
-                        remove_config_subentry_id=sub.subentry_id,
-                    )
-                hass.config_entries.async_remove_subentry(entry, sub_id)
-
-        # Assicurati che esista un AI task subentry
+        # Ensure an AI task subentry exists
         if not any(se.subentry_type == "ai_task_data" for se in entry.subentries.values()):
             hass.config_entries.async_add_subentry(
                 entry,
@@ -190,7 +169,7 @@ async def async_migrate_integration(hass: HomeAssistant) -> None:
 
 
 async def async_migrate_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
-    """Migra entries di versione 0 alla versione 1 e normalizza le opzioni."""
+    """Migrate entries from version 0 to version 1 and normalize options."""
     version = entry.version
     LOGGER.debug("Starting migration for entry %s, current version: %s", entry.entry_id, version)
 
@@ -198,7 +177,7 @@ async def async_migrate_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         data = dict(entry.data)
         options = dict(entry.options)
 
-        # llm_hass_api poteva essere lista ([assist] o [LLM_API_ASSIST]) o bool o assente
+        # llm_hass_api could be list ([assist] or [LLM_API_ASSIST]) or bool or missing
         raw_val = options.get(CONF_LLM_HASS_API, data.get(CONF_LLM_HASS_API))
         if isinstance(raw_val, list):
             options[CONF_LLM_HASS_API] = (
@@ -211,7 +190,7 @@ async def async_migrate_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         else:
             options[CONF_LLM_HASS_API] = False
 
-        # Se il prompt è presente ma vuoto/solo spazi, rimuovilo per permettere fallback al default runtime
+        # If prompt is present but empty/whitespace only, remove it to allow runtime default fallback
         prompt = options.get(CONF_PROMPT)
         if isinstance(prompt, str) and not prompt.strip():
             options.pop(CONF_PROMPT, None)
