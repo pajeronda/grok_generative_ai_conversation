@@ -5,19 +5,19 @@
       "user": {
         "title": "Configuration API",
         "data": {
-          "api_key": "[%key:common::config_flow::data::api_key%]",
+          "api_key": "Clé API",
           "api_endpoint": "Point de terminaison de l'API"
         },
         "description": "Obtenez votre clé API depuis le [site web de x.ai]({api_key_url}). Le point de terminaison API par défaut devrait fonctionner pour la plupart des utilisateurs."
       }
     },
     "error": {
-      "cannot_connect": "[%key:common::config_flow::error::cannot_connect%]",
-      "invalid_auth": "[%key:common::config_flow::error::invalid_auth%]",
-      "unknown": "[%key:common::config_flow::error::unknown%]"
+      "cannot_connect": "Impossible de se connecter",
+      "invalid_auth": "Authentification invalide",
+      "unknown": "Erreur inconnue"
     },
     "abort": {
-      "single_instance_allowed": "[%key:common::config_flow::abort::single_instance_allowed%]"
+      "single_instance_allowed": "Une seule instance autorisée"
     }
   },
   "options": {
