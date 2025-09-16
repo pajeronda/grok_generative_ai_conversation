@@ -11,7 +11,7 @@ generate_content:
         text:
           multiline: true
 
-    model:
+    chat_model:
       name: Model
       description: The Grok model to use for generation. Different models have different capabilities and response styles.
       required: false
