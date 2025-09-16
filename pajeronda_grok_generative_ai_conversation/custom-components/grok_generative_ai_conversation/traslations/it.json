@@ -53,6 +53,22 @@
         "prompt": {
           "name": "Prompt",
           "description": "Il prompt da utilizzare."
+        },
+        "chat_model": {
+          "name": "Modello",
+          "description": "Il modello Grok da utilizzare per la generazione."
+        },
+        "temperature": {
+          "name": "Temperatura",
+          "description": "Controlla la casualità nell'output."
+        },
+        "top_p": {
+          "name": "Top P",
+          "description": "Controlla la diversità nella selezione delle parole."
+        },
+        "max_tokens": {
+          "name": "Token Massimi",
+          "description": "Numero massimo di token da generare."
         }
       }
     }
