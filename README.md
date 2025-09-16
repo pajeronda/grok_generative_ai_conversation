@@ -1,5 +1,8 @@
 # Grok Generative AI Conversation 
-- FIRST RELEASE - BETA
+**Releases:**
+- version 0.1.1: update translations ​​and bug fixes.    
+___
+  
 ## 🎯 Concept: LLM as Intelligent Router
 Home Assistant integration for xAI Grok with intelligent smart home command routing
 
