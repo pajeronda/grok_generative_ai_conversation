@@ -21,9 +21,9 @@ generate_content:
         select:
           options:
             - value: "grok-4"
-              label: "Grok 4 (Latest, most capable)"
+              label: "Grok 4 (Latest, reasoning-only models)"
             - value: "grok-3"
-              label: "Grok 3 (Balanced performance)"
+              label: "Grok 3 (Balanced performance, reasoning-only models)"
             - value: "grok-3-mini"
               label: "Grok 3 Mini (Fast, efficient)"
           mode: dropdown
