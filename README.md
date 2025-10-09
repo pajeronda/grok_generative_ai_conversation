@@ -1,9 +1,9 @@
 # Grok Generative AI Conversation 
 **Releases:**
 - version 0.1.1: update translations ​​and bug fixes.
-- version 0.1.2: prepare for HACS repository    
+- version 0.1.2: update for HACS    
 ___
-**Install:**
+**Install via HACS:**
 
 [![ADD HACS](https://img.shields.io/badge/HACS-ADD-orange.svg?style=for-the-badge)](https://my.home-assistant.io/redirect/hacs_repository/?owner=Pajeronda&repository=grok_generative_ai_conversation&category=integration)
 ___  
