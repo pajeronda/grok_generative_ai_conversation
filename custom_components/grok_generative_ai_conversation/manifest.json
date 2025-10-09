@@ -1,6 +1,6 @@
 {
   "name": "Grok Generative AI",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "domain": "grok_generative_ai_conversation",
   "dependencies": ["conversation"],
   "after_dependencies": ["assist_pipeline", "intent"],
