@@ -135,4 +135,4 @@ Traditional integrations face a dilemma:
 
 *This integration represents a new paradigm in smart home AI: intelligent routing that preserves the strengths of both conversational AI and native home automation systems.*
 ---
-Readme written with Claude.ai
+Readme update 2025-10-09
