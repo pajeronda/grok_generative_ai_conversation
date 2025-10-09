@@ -1,6 +1,7 @@
 # Grok Generative AI Conversation 
 **Releases:**
-- version 0.1.1: update translations ​​and bug fixes.    
+- version 0.1.1: update translations ​​and bug fixes.
+- version 0.1.2: prepare for HACS repository    
 ___
   
 ## 🎯 Concept: LLM as Intelligent Router
