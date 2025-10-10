@@ -3,9 +3,16 @@
 - version 0.1.1: update translations ​​and bug fixes.
 - version 0.1.2: update for HACS    
 ___
-**Install via HACS:**
+## Installation
 
-[![ADD HACS](https://img.shields.io/badge/HACS-ADD-orange.svg?style=for-the-badge)](https://my.home-assistant.io/redirect/hacs_repository/?owner=Pajeronda&repository=grok_generative_ai_conversation&category=integration)
+### HACS
+
+**Grok Generative AI Conversation** is available in [HACS][hacs] (Home Assistant Community Store).
+
+Click this link to install this repository via HACS
+
+[![Open your Home Assistant instance and add a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=Pajeronda&repository=grok_generative_ai_conversation&category=integration)
+
 ___  
 ## 🎯 Concept: LLM as Intelligent Router
 Home Assistant integration for xAI Grok with intelligent smart home command routing
