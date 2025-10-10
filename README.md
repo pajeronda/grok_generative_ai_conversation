@@ -6,10 +6,7 @@ ___
 ## Installation
 
 ### HACS
-
-**Grok Generative AI Conversation** is available in [HACS][hacs] (Home Assistant Community Store).
-
-Click this link to install this repository via HACS
+Click this link to install **Grok Generative AI Conversation** via **HACS**
 
 [![Open your Home Assistant instance and add a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=Pajeronda&repository=grok_generative_ai_conversation&category=integration)
 
