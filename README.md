@@ -3,7 +3,9 @@
 - version 0.1.1: update translations ​​and bug fixes.
 - version 0.1.2: update for HACS    
 ---
-> **⚠️ Important: This custom component has been re-engineered into the new **xAI Conversation** add-on, which you can install by following this link: [xAI Conversation](https://github.com/pajeronda/xai_conversation)**.
+> # ⓘ Important 
+> This custom component has been re-engineered into the new **xAI Conversation** add-on, which you can install by following this link:
+> [xAI Conversation](https://github.com/pajeronda/xai_conversation)
 ___
 ### This version uses [OpenAI Python API library](https://github.com/openai/openai-python)
 ___  
